@@ -1,0 +1,3 @@
+This project aims to be a JUnit Extension that can
+be added to a Quercus Open Source Module and allows
+our own QA-Files to be run.
