@@ -1,0 +1,13 @@
+<title>expr: $a::f() class methods</title>
+<xfail/>
+<php out='stdout' compile='true'>
+<?php
+
+echo "foo";
+?>
+</php>
+
+<compare file='/stdout' escape>
+Bar
+
+</compare>

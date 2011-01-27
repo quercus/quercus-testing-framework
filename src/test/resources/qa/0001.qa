@@ -1,0 +1,276 @@
+<title>expr: $a::f() class methods</title>
+
+<php out='stdout' compile='true'>
+<?php
+
+class A
+{
+  function f0()
+  {
+    echo "  A::f0()\n";
+    echo '    $this : '; var_dump($this);
+    echo '    class : '; var_dump(get_class());
+    echo '    called-class : '; var_dump(get_called_class());
+  }
+  
+  function f1($a1)
+  {
+    echo "  A::f2($a1)\n";
+    echo '    $this : '; var_dump($this);
+    echo '    class : '; var_dump(get_class());
+    echo '    called-class : '; var_dump(get_called_class());
+  }
+  
+  function f2($a1, $a2)
+  {
+    echo "  A::f2($a1, $a2)\n";
+    echo '    $this : '; var_dump($this);
+    echo '    class : '; var_dump(get_class());
+    echo '    called-class : '; var_dump(get_called_class());
+  }
+  
+  function f3($a1, $a2, $a3)
+  {
+    echo "  A::f3($a1, $a2, $a3)\n";
+    echo '    $this : '; var_dump($this);
+    echo '    class : '; var_dump(get_class());
+    echo '    called-class : '; var_dump(get_called_class());
+  }
+  
+  function f4($a1, $a2, $a3, $a4)
+  {
+    echo "  A::f4($a1, $a2, $a3, $a4)\n";
+    echo '    $this : '; var_dump($this);
+    echo '    class : '; var_dump(get_class());
+    echo '    called-class : '; var_dump(get_called_class());
+  }
+  
+  function f5($a1, $a2, $a3, $a4, $a5)
+  {
+    echo "  A::f5($a1, $a2, $a3, $a4, $a5)\n";
+    echo '    $this : '; var_dump($this);
+    echo '    class : '; var_dump(get_class());
+    echo '    called-class : '; var_dump(get_called_class());
+  }
+  
+  function f6($a1, $a2, $a3, $a4, $a5, $a6)
+  {
+    echo "  A::f6($a1, $a2, $a3, $a4, $a5, $a6)\n";
+    echo '   $this : '; var_dump($this);
+    echo '   class : '; var_dump(get_class());
+    echo '   called-class : '; var_dump(get_called_class());
+  }
+}
+
+class B extends A {
+}
+
+class T {
+  function t0()
+  {
+    $class = "B";
+    
+    $class::f0();
+  }
+  
+  function t1($a1)
+  {
+    $class = "B";
+    
+    $class::f1($a1);
+  }
+  
+  function t2($a1, $a2)
+  {
+    $class = "B";
+    
+    $class::f2($a1, $a2);
+  }
+  
+  function t3($a1, $a2, $a3)
+  {
+    $class = "B";
+    
+    $class::f3($a1, $a2, $a3);
+  }
+  
+  function t4($a1, $a2, $a3, $a4)
+  {
+    $class = "B";
+    
+    $class::f4($a1, $a2, $a3, $a4);
+  }
+  
+  function t5($a1, $a2, $a3, $a4, $a5)
+  {
+    $class = "B";
+    
+    $class::f5($a1, $a2, $a3, $a4, $a5);
+  }
+  
+  function t6($a1, $a2, $a3, $a4, $a5, $a6)
+  {
+    $class = "B";
+    
+    $class::f6($a1, $a2, $a3, $a4, $a5, $a6);
+  }
+}
+
+function test()
+{
+  $class = "B";
+  
+  $class::f0();
+  $class::f1(1);
+  $class::f2(1, 2);
+  $class::f3(1, 2, 3);
+  $class::f4(1, 2, 3, 4);
+  $class::f5(1, 2, 3, 4, 5);
+  $class::f6(1, 2, 3, 4, 5, 6);
+}
+
+echo "--- B::f0()\n\n";
+
+$class = "B";
+
+$class::f0();
+$class::f1(1);
+$class::f2(1, 2);
+$class::f3(1, 2, 3);
+$class::f4(1, 2, 3, 4);
+$class::f5(1, 2, 3, 4, 5);
+$class::f6(1, 2, 3, 4, 5, 6);
+
+echo "\n--- $t->t0\n\n";
+
+$t = new T();
+
+$t->t0();
+$t->t1(1);
+$t->t2(1, 2);
+$t->t3(1, 2, 3);
+$t->t4(1, 2, 3, 4);
+$t->t5(1, 2, 3, 4, 5);
+$t->t6(1, 2, 3, 4, 5, 6);
+
+echo "\n--- test()\n\n";
+
+test();
+
+echo "\n--- A::F0()\n\n";
+
+$class = "A";
+$class::F0();
+
+?>
+</php>
+
+<compare file='/stdout' escape>
+--- B::f0()
+
+  A::f0()
+    $this : NULL
+    class : string(1) "A"
+    called-class : string(1) "B"
+  A::f2(1)
+    $this : NULL
+    class : string(1) "A"
+    called-class : string(1) "B"
+  A::f2(1, 2)
+    $this : NULL
+    class : string(1) "A"
+    called-class : string(1) "B"
+  A::f3(1, 2, 3)
+    $this : NULL
+    class : string(1) "A"
+    called-class : string(1) "B"
+  A::f4(1, 2, 3, 4)
+    $this : NULL
+    class : string(1) "A"
+    called-class : string(1) "B"
+  A::f5(1, 2, 3, 4, 5)
+    $this : NULL
+    class : string(1) "A"
+    called-class : string(1) "B"
+  A::f6(1, 2, 3, 4, 5, 6)
+   $this : NULL
+   class : string(1) "A"
+   called-class : string(1) "B"
+
+--- 
+
+  A::f0()
+    $this : object(T) (0) {
+}
+    class : string(1) "A"
+    called-class : string(1) "T"
+  A::f2(1)
+    $this : object(T) (0) {
+}
+    class : string(1) "A"
+    called-class : string(1) "T"
+  A::f2(1, 2)
+    $this : object(T) (0) {
+}
+    class : string(1) "A"
+    called-class : string(1) "T"
+  A::f3(1, 2, 3)
+    $this : object(T) (0) {
+}
+    class : string(1) "A"
+    called-class : string(1) "T"
+  A::f4(1, 2, 3, 4)
+    $this : object(T) (0) {
+}
+    class : string(1) "A"
+    called-class : string(1) "T"
+  A::f5(1, 2, 3, 4, 5)
+    $this : object(T) (0) {
+}
+    class : string(1) "A"
+    called-class : string(1) "T"
+  A::f6(1, 2, 3, 4, 5, 6)
+   $this : object(T) (0) {
+}
+   class : string(1) "A"
+   called-class : string(1) "T"
+
+--- test()
+
+  A::f0()
+    $this : NULL
+    class : string(1) "A"
+    called-class : string(1) "B"
+  A::f2(1)
+    $this : NULL
+    class : string(1) "A"
+    called-class : string(1) "B"
+  A::f2(1, 2)
+    $this : NULL
+    class : string(1) "A"
+    called-class : string(1) "B"
+  A::f3(1, 2, 3)
+    $this : NULL
+    class : string(1) "A"
+    called-class : string(1) "B"
+  A::f4(1, 2, 3, 4)
+    $this : NULL
+    class : string(1) "A"
+    called-class : string(1) "B"
+  A::f5(1, 2, 3, 4, 5)
+    $this : NULL
+    class : string(1) "A"
+    called-class : string(1) "B"
+  A::f6(1, 2, 3, 4, 5, 6)
+   $this : NULL
+   class : string(1) "A"
+   called-class : string(1) "B"
+
+--- A::F0()
+
+  A::f0()
+    $this : NULL
+    class : string(1) "A"
+    called-class : string(1) "A"
+
+</compare>
